@@ -1,11 +1,11 @@
 import React from 'react';
-// import { Link } from 'react-router';
+
 const Header = () => {
 	return (
 		<nav>
-			{/* <Link to="/users" activeClassName="active">Usuários</Link> */}
+			header
 		</nav>
 	);
 };
 
-export default Header;  
+export default Header;

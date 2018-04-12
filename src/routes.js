@@ -1,13 +1,15 @@
 import React from 'react';
 import {
-	Route,
-	IndexRoute
-} from 'react-router';
-
+	Switch,
+	Route
+} from 'react-router-dom';
 import App from './components/App';
+import HomePage from './components/home/home';
 
 export default (
-	<Route path="/" component={App}>
-
-	</Route>
+	<main>
+		<Switch>
+			<Route exact path='/' component={HomePage} ></Route>
+		</Switch>
+	</main>
 );
