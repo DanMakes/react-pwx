@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Jumbotron } from 'react-bootstrap';
+import { Row, Col, Jumbotron, Button } from 'react-bootstrap';
 class UserPage extends React.Component {
 	render() {
 		return (
@@ -7,7 +7,8 @@ class UserPage extends React.Component {
 				<Row>
 					<Col>
 						Daew
-				</Col>
+						<Button bsStyle='primary'>Primary </Button>
+					</Col>
 				</Row>
 			</Jumbotron>
 		);
