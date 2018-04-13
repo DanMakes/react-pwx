@@ -1,16 +1,19 @@
 import React from 'react';
-import Header from './common/header';
+import { Header, NavbarComponent } from './common/';
 
 import Routes from '../routes';
 
 class App extends React.Component {
 	render() {
 		return (
-			<div className="container-fluid">
+			<main>
 				<Header />
-				{Routes}
+				<NavbarComponent />
+				<div className="container">
+					{Routes}
+				</div>
 				{this.props.children}
-			</div>
+			</main>
 		);
 	}
 }

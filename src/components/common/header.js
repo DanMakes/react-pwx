@@ -1,11 +1,17 @@
 import React from 'react';
+import { Navbar } from 'react-bootstrap';
+class Header extends React.Component {
+	render() {
+		return (
+			<Navbar >
+				<Navbar.Brand>
+					PWX
+				</Navbar.Brand>
 
-const Header = () => {
-	return (
-		<nav>
-			header
-		</nav>
-	);
-};
+			</Navbar>
+
+		);
+	}
+}
 
 export default Header;

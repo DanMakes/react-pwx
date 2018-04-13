@@ -3,13 +3,14 @@ import {
 	Switch,
 	Route
 } from 'react-router-dom';
-import App from './components/App';
 import HomePage from './components/home/home';
+import UserPage from './components/user/user';
 
 export default (
 	<main>
 		<Switch>
 			<Route exact path='/' component={HomePage} ></Route>
+			<Route path='/users' component={UserPage}></Route>
 		</Switch>
 	</main>
 );
