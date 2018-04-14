@@ -1,16 +1,20 @@
 import React from 'react';
-import { Row, Col, Jumbotron, Button } from 'react-bootstrap';
+import { Breadcrumb, BreadcrumbItem, } from 'react-bootstrap';
+
+import { Route } from 'react-router';
+import UserListPage from './list/user';
+
 class UserPage extends React.Component {
 	render() {
 		return (
-			<Jumbotron>
-				<Row>
-					<Col>
-						Daew
-						<Button bsStyle='primary'>Primary </Button>
-					</Col>
-				</Row>
-			</Jumbotron>
+			<section>
+				<Breadcrumb>
+					<BreadcrumbItem>
+						Usuários
+					</BreadcrumbItem>
+				</Breadcrumb>
+				<Route path='/users' component={UserListPage}></Route>
+			</section>
 		);
 	}
 }
