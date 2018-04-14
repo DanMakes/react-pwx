@@ -1,6 +1,7 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Row, Col } from 'react-bootstrap';
 
+import { Route } from 'react-router-dom';
 import UserListPage from './list/user';
 import UserDetailPage from './detail/userDetail';
 
@@ -18,7 +19,7 @@ class UserPage extends React.Component {
 						<UserListPage />
 					</Col>
 					<Col md={6}>
-
+						<Route exact path='/users/:id' component={UserDetailPage} />
 					</Col>
 				</Row>
 

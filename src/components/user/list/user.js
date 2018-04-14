@@ -40,7 +40,6 @@ class UserListPage extends React.Component {
 						</Panel.Body>
 					</Panel>
 				</Col>
-
 			</Row>
 		);
 	}
