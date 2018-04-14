@@ -1,12 +1,10 @@
 import { USER } from './actionTypes';
+import userApi from '../api/userApi';
 
 export function load() {
 	return function (dispatch) {
-		return new Promise((resolve, reject) => {
-
-			resolve([]);
-			dispatch(loadSuccess([]));
-		});
+		return userApi.fetch()
+			.then(res => dispatch(loadSuccess(res.data)));
 	};
 };
 

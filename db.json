@@ -1,0 +1,10 @@
+{
+	"pessoas": [{
+		"id": 1,
+		"nome": "João",
+		"sobrenome": "Hencke",
+		"cpf": "04678444963",
+		"nascimentoTs": 693540000000,
+		"email": "joao.hencke@gmail.com"
+	}]
+}
