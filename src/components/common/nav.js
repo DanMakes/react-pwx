@@ -5,8 +5,8 @@ class NavbarComponent extends React.Component {
 	render() {
 		return (
 			<Nav pullLeft>
-				<LinkContainer to='/users' activeClassName='active'>
-					<NavItem eventKey={2}>Usuários</NavItem>
+				<LinkContainer to='/users/' activeClassName='active'>
+					<NavItem eventKey={1}>Usuários</NavItem>
 				</LinkContainer>
 			</Nav>
 

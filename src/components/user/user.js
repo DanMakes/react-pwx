@@ -1,8 +1,8 @@
 import React from 'react';
-import { Breadcrumb, BreadcrumbItem, } from 'react-bootstrap';
+import { Breadcrumb, BreadcrumbItem, Row, Col } from 'react-bootstrap';
 
-import { Route } from 'react-router';
 import UserListPage from './list/user';
+import UserDetailPage from './detail/userDetail';
 
 class UserPage extends React.Component {
 	render() {
@@ -13,7 +13,15 @@ class UserPage extends React.Component {
 						Usuários
 					</BreadcrumbItem>
 				</Breadcrumb>
-				<Route path='/users' component={UserListPage}></Route>
+				<Row>
+					<Col md={6}>
+						<UserListPage />
+					</Col>
+					<Col md={6}>
+
+					</Col>
+				</Row>
+
 			</section>
 		);
 	}

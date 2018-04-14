@@ -5,12 +5,8 @@ import App from './components/App';
 import { Provider } from 'react-redux';
 import registerServiceWorker from './registerServiceWorker';
 import configStore from './store/configStore';
-import { load } from './actions/userActions';
-
-
+require('./index.css');
 const store = configStore();
-
-store.dispatch(load());
 
 ReactDOM.render(
 	<Provider store={store}>

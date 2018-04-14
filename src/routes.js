@@ -8,7 +8,7 @@ import UserPage from './components/user/user';
 
 export default (
 	<Switch>
-		<Route exact path='/' component={HomePage} ></Route>
-		<Route path='/users' component={UserPage}></Route>
+		<Route exact path='/' component={HomePage} />
+		<Route path='/users' component={UserPage} />
 	</Switch>
 );

@@ -1,5 +1,5 @@
 
 import Header from './header';
 import NavbarComponent from './nav';
-
-export { Header, NavbarComponent };
+import Loading from './loading';
+export { Header, NavbarComponent, Loading };

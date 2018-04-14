@@ -6,5 +6,12 @@
 		"cpf": "04678444963",
 		"nascimentoTs": 693540000000,
 		"email": "joao.hencke@gmail.com"
+	}, {
+		"id": 2,
+		"nome": "José",
+		"sobrenome": "Lopes",
+		"cpf": "09835711984",
+		"nascimentoTs": 693540000000,
+		"email": "jose.lopes@gmail.com"
 	}]
 }
