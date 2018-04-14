@@ -4,12 +4,17 @@ import { USER } from '../actions/actionTypes';
 import initialState from './initialState';
 
 export default function userReducer(state = initialState.users, action) {
-	console.log(state, action)
 	switch (action.type) {
 		case USER.LOAD.SUCCESS:
-			return action.users;
+			return {
+				...state,
+				users: action.users
+			};
 		case USER.GET.SUCCESS:
-			return action.user;
+			return {
+				...state,
+				user: action.user
+			};
 		default:
 			return state;
 	}

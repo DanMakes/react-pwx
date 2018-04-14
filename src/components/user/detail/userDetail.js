@@ -12,22 +12,26 @@ class UserDetailPage extends React.Component {
 			user: this.props.user
 		};
 	}
+	shouldComponentUpdate(nextProps, nextState) {
+		console.log(this.props, 'prev')
+
+		return nextProps.match.params.id !== this.props.match.params.id;
+	}
+	componentDidUpdate() {
+		// console.log(this.props.match.params)
+		this.setState({ loading: true });
+		this.props.get(this.props.match.params.id)
+			.then(() => this.setState({ loading: false }))
+			.catch(() => this.setState({ loading: false }));
+		// this.props.get(this.props.match.params.id)
+		// 	.then(user => this.setState({ user }));
+	}
 	componentWillMount() {
-		// this.setState(Object.assign(this.state, { loading: true }));
-
-		// this.props.get(this.props.match.params.id)
-		// this.props.get(this.props.match.params.id)
-		// 	.then((user) => {
-		// 		// this.setState({ user, loading: false });
-
-		// 	})
-		// 	.catch(() => {
-		// 		// this.setState({ loading: false });
-		// 	});
+		this.props.get(this.props.match.params.id);
 	}
 	render() {
 		return (
-			<div>Olá {this.props.users}</div>
+			<div>Olá {this.props.user && this.props.user.nome}</div>
 		)
 	}
 }
@@ -39,10 +43,9 @@ class UserDetailPage extends React.Component {
 // };
 const mapStateToProps = (state, ownProps) => {
 	return {
-		user: state.user
+		user: state.users.user
 	};
 };
-console.log(userActions);
 const mapDispatchToProps = dispatch => bindActionCreators({ get: userActions.get }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserDetailPage);

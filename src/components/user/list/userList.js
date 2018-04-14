@@ -2,18 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import { Link } from 'react-router-dom';
 
 const UserList = ({ users = [] }) => {
-
 	return (
 		<ListGroup>
 			{users.map(user =>
-				<LinkContainer key={user.id} to={`/users/${user.id}`} activeClassName='active'>
-					<ListGroupItem >
+				<Link key={user.id} to={`/users/${user.id}`} >
+					<ListGroupItem>
 						{user.nome}
 					</ListGroupItem>
-				</LinkContainer>
+				</Link>
 			)}
 		</ListGroup>
 	);
