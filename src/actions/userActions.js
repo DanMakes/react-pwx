@@ -13,6 +13,10 @@ export function put(user) {
 	return (dispatch) => userApi.put(user).then(res => dispatch(getSuccess(res.data, USER.CREATE.SUCCESS)));
 };
 
+export function remove(id) {
+	return (dispatch) => userApi.delete(id).then(res => dispatch(getSuccess({ id }, USER.DELETE.SUCCESS)));
+};
+
 export function loadSuccess(users) {
 	return { type: USER.LOAD.SUCCESS, users };
 };

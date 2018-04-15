@@ -7,5 +7,8 @@ export const USER = {
 	},
 	CREATE: {
 		SUCCESS: 'USER_CREATE_SUCCESS'
+	},
+	DELETE: {
+		SUCCESS: 'USER_DELETE_SUCCESS'
 	}
 };

@@ -1,22 +1,3 @@
 {
-  "pessoas": [
-    {
-      "isCreation": true,
-      "nome": "kkjkjkajsd",
-      "sobrenome": "jksahdkjasdh",
-      "cpf": "12312312312",
-      "email": "123123@asdasd.com",
-      "nascimentoTs": 1543629600000,
-      "id": 1
-    },
-    {
-      "isCreation": true,
-      "nome": "asdasd",
-      "sobrenome": "asdasdasd",
-      "cpf": "12312312313",
-      "email": "asdsad@asdasd.com",
-      "nascimentoTs": 1543629600000,
-      "id": 2
-    }
-  ]
+  "pessoas": []
 }

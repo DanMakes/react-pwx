@@ -153,7 +153,8 @@ class UserPutPage extends React.Component {
 		return this.props.put(user)
 			.then(() => toast.success('Usuário salvo com sucesso'))
 			.catch(() => toast.error('Problemas ao salvar usuário'))
-			.then(() => this.setState({ submitting: false }));
+			.then(() => this.setState({ submitting: false }))
+			.then(() => this.props.history.goBack());
 	}
 	render() {
 		const { nome, sobrenome, email, nascimento, cpf } = this.state;
@@ -182,7 +183,7 @@ class UserPutPage extends React.Component {
 				</div>
 				<div className={groupClasses.email}>
 					<input type="text" name="email" className="form-control"
-						placeholder="Email address" value={this.props.email.value} onChange={this.handleChange} />
+						placeholder="Email" value={this.props.email.value} onChange={this.handleChange} />
 					<span className="help-block">{email.message}</span>
 				</div>
 				<div className={groupClasses.nascimento}>

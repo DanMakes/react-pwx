@@ -26,6 +26,10 @@ class UserApi {
 		if (user.isCreation) return this.create(user);
 		return this.update(user);
 	}
+	static delete(id) {
+		return axios.delete(`${API_PATH}/pessoas/${id}`)
+			.catch(res => Promise.reject(UserApi.ERROR_MSG));
+	}
 }
 
 export default UserApi;

@@ -15,7 +15,7 @@ const UserList = ({ users = [] }) => {
 						{user.nome}
 						<div className="list-actions">
 							<div className="btn-group">
-								<UserDelete />
+								<UserDelete user={user} />
 							</div>
 						</div>
 					</ListGroupItem>
