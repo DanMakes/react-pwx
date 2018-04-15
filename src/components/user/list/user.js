@@ -17,7 +17,7 @@ class UserListPage extends React.Component {
 			filter: undefined,
 			query: undefined,
 			loading: false,
-			users: [],
+			users: this.props.users,
 			page: 1
 		};
 	}
@@ -53,7 +53,7 @@ class UserListPage extends React.Component {
 						<Pager.Item previous onClick={(e) => this.addPage(-1)} disabled={!this.state.page || this.state.page <= 1}>
 							Anterior
 						</Pager.Item>
-						<Pager.Item next onClick={(e) => this.addPage(1)} disabled={!this.state.page || this.state.users.length < 10}>
+						<Pager.Item next onClick={(e) => this.addPage(1)} disabled={this.props.users.length < 10}>
 							Próximo
 						</Pager.Item>
 					</Pager>
@@ -63,7 +63,6 @@ class UserListPage extends React.Component {
 	}
 }
 
-
-const mapStateToProps = state => ({ users: state.users.users });
+const mapStateToProps = state => ({ users: state.users.users, page: 1 });
 const mapDispatchToProps = dispatch => bindActionCreators(userActions, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(UserListPage);

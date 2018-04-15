@@ -1,14 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
+import { BounceLoader } from 'react-spinners';
 import { bindActionCreators } from 'redux';
 import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
-
+import MaskedInput from 'react-maskedinput';
 import classNames from 'classnames';
 import * as userActions from '../../../actions/userActions';
-import FieldGroup from './fieldGroup';
 import moment from 'moment';
 
 import validator from 'validator';
@@ -23,6 +22,8 @@ class UserPutPage extends React.Component {
 		this.handleChange = this.handleChange.bind(this);
 		this.submit = this.submit.bind(this);
 		this.state = {
+			submitting: false,
+			isCreation: this.props.isCreation,
 			nome: {
 				valid: true,
 				value: '',
@@ -70,6 +71,7 @@ class UserPutPage extends React.Component {
 	isValid() {
 		const state = this.state;
 		let isValid = true;
+
 		if (!validator.isEmail(state.email.value)) {
 			state.email.valid = false;
 			state.email.message = `O email ${state.email.value} não é válido`;
@@ -79,6 +81,12 @@ class UserPutPage extends React.Component {
 		if (!validator.isLength(state.nome.value.concat(state.sobrenome.value), { min: 0, max: 150 })) {
 			state.sobrenome.valid = state.nome.valid = false;
 			state.sobrenome.message = state.nome.message = 'Nome e sobrenome excedem o limite de 150 caracteres';
+			isValid = false;
+		}
+		console.log(moment(state.nascimento.value, 'DD/MM/YYYY').isValid())
+		if (!moment(state.nascimento.value, 'DD/MM/YYYY').isValid()) {
+			state.nascimento.valid = false;
+			state.nascimento.message = 'Data inválida';
 			isValid = false;
 		}
 
@@ -99,6 +107,7 @@ class UserPutPage extends React.Component {
 			state.cpf.message = 'CPF é obrigatório';
 			isValid = false;
 		}
+
 		if (!state.nascimento.value.length) {
 			state.nascimento.valid = false;
 			state.nascimento.message = 'Nascimento é obrigatório';
@@ -114,10 +123,15 @@ class UserPutPage extends React.Component {
 	}
 	submit(e) {
 		e.preventDefault();
-		this.resetValidations();
-
-		if (!this.isValid()) return toast.error('O formulário contém dados inválidos.');
 		var state = this.state;
+
+		if (state.submitting) return;
+
+		state.submitting = true;
+		this.setState(state);
+
+		this.resetValidations();
+		if (!this.isValid()) return toast.error('O formulário contém dados inválidos.');
 		const user = {
 			id: this.props.match.id,
 			isCreation: !this.props.match.id
@@ -129,7 +143,11 @@ class UserPutPage extends React.Component {
 					user[key] = state[key].value;
 				}
 			});
-		return this.props.put(user);
+		user.nascimentoTs = moment(user.nascimento, 'dd/MM/yyyy').valueOf();
+		return this.props.put(user)
+			.then(() => toast.success('Usuário salvo com sucesso'))
+			.catch(() => toast.error('Problemas ao salvar usuário'))
+			.then(() => this.setState({ submitting: false }));
 	}
 	render() {
 		const { nome, sobrenome, email, nascimento, cpf } = this.state;
@@ -139,7 +157,7 @@ class UserPutPage extends React.Component {
 		});
 		return (
 			<form className="form" onSubmit={this.submit}>
-				<h2 className="header">Novo usuário</h2>
+				<h2 className="header">{this.state.isCreation ? 'Novo ' : 'Editar '} usuário</h2>
 
 				<div className={groupClasses.nome}>
 					<input type="text" name="nome" className="form-control"
@@ -152,7 +170,7 @@ class UserPutPage extends React.Component {
 					<span className="help-block">{sobrenome.message}</span>
 				</div>
 				<div className={groupClasses.cpf}>
-					<input type="text" name="cpf" className="form-control"
+					<MaskedInput type="text" name="cpf" className="form-control" mask='111.111.111-11'
 						placeholder="CPF" value={this.props.cpf.value} onChange={this.handleChange} />
 					<span className="help-block">{cpf.message}</span>
 				</div>
@@ -162,11 +180,14 @@ class UserPutPage extends React.Component {
 					<span className="help-block">{email.message}</span>
 				</div>
 				<div className={groupClasses.nascimento}>
-					<input type="text" name="nascimento" className="form-control"
-						placeholder="Data de Nascimento" value={this.props.nascimento.value} onChange={this.handleChange} />
+					<MaskedInput type="text" name="nascimento" className="form-control"
+						mask='11/11/1111'
+						placeholder="Data de Nascimento (dd/MM/yyyy)" value={this.props.nascimento.value} onChange={this.handleChange} />
 					<span className="help-block">{nascimento.message}</span>
 				</div>
-				<button type='submit' className='btn btn-primary'>Salvar</button>&nbsp;
+				<button type='submit' className='btn btn-primary'>
+					{this.state.submitting ? (<BounceLoader size={18} />) : 'Salvar'}
+				</button>&nbsp;
 					<Link className='btn btn-default' type='button' to='/users/'> Cancelar</Link>
 			</form>
 
@@ -182,7 +203,7 @@ UserPutPage.defaultProps = {
 	user: { isCreation: true }
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProp) => {
 	const user = Object.assign({}, state.users.user);
 	return {
 		nome: {
@@ -190,7 +211,8 @@ const mapStateToProps = state => {
 		nascimento: {},
 		sobrenome: {},
 		email: {},
-		cpf: {}
+		cpf: {},
+		isCreation: !ownProp.match.params.id,
 	};
 };
 
