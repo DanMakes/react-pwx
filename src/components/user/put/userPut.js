@@ -1,8 +1,21 @@
 import React from 'react';
+import { Modal } from 'react-bootstrap';
 
+class UserPutPage extends React.Component {
 
-class UserPut {
-
+	render() {
+		return (
+			<Modal
+				{...this.props}>
+				<Modal.Header closeButton={true}>
+					<Modal.Title>Novo</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					Bodyzao
+				</Modal.Body>
+			</Modal>
+		);
+	}
 }
 
-export default UserPut;
+export default UserPutPage;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Panel } from 'react-bootstrap';
+import { Row, Col, Panel, Pager } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import UserSearch from './userSearch';
@@ -14,32 +14,49 @@ class UserListPage extends React.Component {
 		super(props, context);
 
 		this.state = {
+			filter: undefined,
+			query: undefined,
 			loading: false,
-			users: []
+			users: [],
+			page: 1
 		};
 	}
 	componentWillMount() {
-		this.setState({ loading: true });
-		this.props.load()
+		this.onSearch();
+	}
+	onSearch(query, page) {
+		this.setState({ query, page, loading: true });
+		this.props.load({ query, page })
 			.then(() => this.setState({ loading: false }))
 			.catch(() => this.setState({ loading: false }));
 	}
-	onSearch() {
-
+	addPage(quantity) {
+		const page = (this.state.page || 1) + quantity;
+		console.log(page);
+		this.onSearch(this.state.query, page)
 	}
+
 	render() {
 		return (
 			<Row>
 				<Col>
 					<Panel>
 						<Panel.Heading>
-							<UserSearch onChange={this.onSearch} />
+							<UserSearch onChange={(args) => this.onSearch(args)} />
 						</Panel.Heading>
 						{this.state.loading && <Loading />}
 						<Panel.Body>
-							{!this.loading && <UserList users={this.props.users}></UserList>}
+							{!this.state.loading && <UserList users={this.props.users}></UserList>}
 						</Panel.Body>
 					</Panel>
+					<Pager>
+						<Pager.Item previous onClick={(e) => this.addPage(-1)} disabled={!this.state.page || this.state.page <= 1}>
+							Anterior
+						</Pager.Item>
+						<Pager.Item next onClick={(e) => this.addPage(1)} disabled={!this.state.page || this.state.users.length < 10}>
+							Próximo
+						</Pager.Item>
+					</Pager>
 				</Col>
 			</Row>
 		);

@@ -1,8 +1,8 @@
 import { USER } from './actionTypes';
 import userApi from '../api/userApi';
 
-export function load() {
-	return (dispatch) => userApi.fetch().then(res => dispatch(loadSuccess(res.data)));
+export function load(args) {
+	return (dispatch) => userApi.fetch(args).then(res => dispatch(loadSuccess(res.data)));
 };
 
 export function get(id) {
