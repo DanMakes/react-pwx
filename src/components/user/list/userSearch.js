@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const UserSearch = ({ }) => {
+const UserSearch = ({ a }) => {
 	return (
 		<input type='search' className='form-control' placeholder='Pesquisar' />
 	);

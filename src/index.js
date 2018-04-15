@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import registerServiceWorker from './registerServiceWorker';
 import configStore from './store/configStore';
 require('./index.css');
+
 const store = configStore();
 
 ReactDOM.render(

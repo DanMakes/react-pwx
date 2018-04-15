@@ -2,10 +2,8 @@ import React from 'react';
 import { Row, Col, Panel } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import PropTypes from 'prop-types';
 import UserSearch from './userSearch';
 import UserList from './userList';
-import UserDetailPage from '../detail/userDetail';
 
 import { Loading } from '../../common';
 import * as userActions from '../../../actions/userActions';
@@ -39,7 +37,7 @@ class UserListPage extends React.Component {
 						</Panel.Heading>
 						{this.state.loading && <Loading />}
 						<Panel.Body>
-							{this.props.users && <UserList users={this.props.users}></UserList>}
+							{!this.loading && <UserList users={this.props.users}></UserList>}
 						</Panel.Body>
 					</Panel>
 				</Col>

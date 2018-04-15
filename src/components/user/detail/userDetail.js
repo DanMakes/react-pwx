@@ -1,7 +1,13 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+
+import { Panel, ListGroup, ListGroupItem } from 'react-bootstrap';
+
 import * as userActions from '../../../actions/userActions';
+import PropTypes from 'prop-types';
+import { Loading } from '../../common';
+import DetailTextField from './detailTextField';
 
 class UserDetailPage extends React.Component {
 	constructor(props, context) {
@@ -12,40 +18,52 @@ class UserDetailPage extends React.Component {
 			user: this.props.user
 		};
 	}
-	shouldComponentUpdate(nextProps, nextState) {
-		console.log(this.props, 'prev')
-
-		return nextProps.match.params.id !== this.props.match.params.id;
+	formatter(val) {
+		return val.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, '\$1.\$2.\$3\-\$4');
 	}
-	componentDidUpdate() {
-		// console.log(this.props.match.params)
+	load(id) {
 		this.setState({ loading: true });
-		this.props.get(this.props.match.params.id)
-			.then(() => this.setState({ loading: false }))
+		return this.props.get(id)
+			.then((user) => this.setState({ user, loading: false }))
 			.catch(() => this.setState({ loading: false }));
-		// this.props.get(this.props.match.params.id)
-		// 	.then(user => this.setState({ user }));
+	}
+	componentWillReceiveProps(nextProps, nextState) {
+		if (this.props.match.params.id !== nextProps.match.params.id)
+			this.load(nextProps.match.params.id);
 	}
 	componentWillMount() {
-		this.props.get(this.props.match.params.id);
+		this.load(this.props.match.params.id);
 	}
 	render() {
 		return (
-			<div>Olá {this.props.user && this.props.user.nome}</div>
-		)
+			<Panel>
+				<Panel.Body>
+					{this.state.loading && <Loading />}
+					{!this.state.loading &&
+						< ListGroup>
+							<ListGroupItem className='no-divider'>
+								<DetailTextField text={`${this.props.user.nome} ${this.props.user.sobrenome}`} label='Nome' />
+							</ListGroupItem>
+							<ListGroupItem className='no-divider'>
+								<DetailTextField text={this.props.user.email} label='Email' />
+							</ListGroupItem>
+							<ListGroupItem className='no-divider'>
+								<DetailTextField text={this.props.user.cpf} label='CPF' formatter={this.formatter} />
+							</ListGroupItem>
+
+						</ListGroup>
+					}
+				</Panel.Body>
+			</Panel>
+		);
 	}
 }
 
-
-// const mapStateToProps = state => {
-// 	console.log(state);
-// 	return { user: state.user }
-// };
-const mapStateToProps = (state, ownProps) => {
-	return {
-		user: state.users.user
-	};
+UserDetailPage.propTypes = {
+	user: PropTypes.object
 };
+
+const mapStateToProps = (state, ownProps) => ({ user: state.users.user });
 const mapDispatchToProps = dispatch => bindActionCreators({ get: userActions.get }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserDetailPage);
