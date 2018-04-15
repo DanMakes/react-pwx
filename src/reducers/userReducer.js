@@ -15,10 +15,13 @@ export default function userReducer(state = initialState, action) {
 				user: Object.assign({}, action.user)
 			};
 		case USER.CREATE.SUCCESS:
+			const users = [...state.users];
+			users.push(action.user);
 			return {
 				...state,
-				user: Object.assign({}, action.user)
-			};
+				user: Object.assign({}, action.user),
+				users: users
+			};;
 		default:
 			return state;
 	}

@@ -9,6 +9,7 @@ import MaskedInput from 'react-maskedinput';
 import classNames from 'classnames';
 import * as userActions from '../../../actions/userActions';
 import moment from 'moment';
+import { removeMask } from '../../../util/utils';
 
 import validator from 'validator';
 
@@ -66,6 +67,7 @@ class UserPutPage extends React.Component {
 					state[key].valid = true;
 					state[key].message = '';
 				}
+				return state[key];
 			});
 	}
 	isValid() {
@@ -127,8 +129,6 @@ class UserPutPage extends React.Component {
 
 		if (state.submitting) return;
 
-		state.submitting = true;
-		this.setState(state);
 
 		this.resetValidations();
 		if (!this.isValid()) return toast.error('O formulário contém dados inválidos.');
@@ -137,13 +137,19 @@ class UserPutPage extends React.Component {
 			isCreation: !this.props.match.id
 		};
 
+		state.submitting = true;
+		this.setState(state);
 		Object.keys(state)
 			.map(key => {
 				if (state[key].hasOwnProperty('value')) {
 					user[key] = state[key].value;
 				}
+				return state;
 			});
+		user.cpf = removeMask(user.cpf);
 		user.nascimentoTs = moment(user.nascimento, 'dd/MM/yyyy').valueOf();
+		delete user.nascimento;
+
 		return this.props.put(user)
 			.then(() => toast.success('Usuário salvo com sucesso'))
 			.catch(() => toast.error('Problemas ao salvar usuário'))
@@ -204,7 +210,7 @@ UserPutPage.defaultProps = {
 };
 
 const mapStateToProps = (state, ownProp) => {
-	const user = Object.assign({}, state.users.user);
+	// const user = Object.assign({}, state.users.user);
 	return {
 		nome: {
 		},

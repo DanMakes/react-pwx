@@ -32,7 +32,6 @@ class UserListPage extends React.Component {
 	}
 	addPage(quantity) {
 		const page = (this.state.page || 1) + quantity;
-		console.log(page);
 		this.onSearch(this.state.query, page)
 	}
 
