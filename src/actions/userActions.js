@@ -6,14 +6,18 @@ export function load(args) {
 };
 
 export function get(id) {
-	return (dispatch) => userApi.get(id).then(res => dispatch(getSuccess(res.data)));
+	return (dispatch) => userApi.get(id).then(res => dispatch(getSuccess(res.data, USER.GET.SUCCESS)));
+};
+
+export function put(user) {
+	return (dispatch) => userApi.put(user).then(res => dispatch(getSuccess(res.data, USER.CREATE.SUCCESS)));
 };
 
 export function loadSuccess(users) {
 	return { type: USER.LOAD.SUCCESS, users };
 };
 
-export function getSuccess(user) {
-	return { type: USER.GET.SUCCESS, user };
-}
+export function getSuccess(user, type) {
+	return { type, user };
+};
 

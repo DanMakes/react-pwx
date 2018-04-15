@@ -4,5 +4,8 @@ export const USER = {
 	},
 	GET: {
 		SUCCESS: 'USER_GET_SUCCESS'
+	},
+	CREATE: {
+		SUCCESS: 'USER_CREATE_SUCCESS'
 	}
 };

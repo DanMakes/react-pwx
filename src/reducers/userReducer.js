@@ -1,6 +1,5 @@
 import { USER } from '../actions/actionTypes';
 
-
 import initialState from './initialState';
 
 export default function userReducer(state = initialState, action) {
@@ -13,7 +12,12 @@ export default function userReducer(state = initialState, action) {
 		case USER.GET.SUCCESS:
 			return {
 				...state,
-				user: action.user
+				user: Object.assign({}, action.user)
+			};
+		case USER.CREATE.SUCCESS:
+			return {
+				...state,
+				user: Object.assign({}, action.user)
 			};
 		default:
 			return state;

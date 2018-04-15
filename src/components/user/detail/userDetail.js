@@ -1,8 +1,9 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-
 import { Panel, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import * as userActions from '../../../actions/userActions';
 import PropTypes from 'prop-types';
@@ -15,6 +16,7 @@ class UserDetailPage extends React.Component {
 
 		this.state = {
 			loading: false,
+			notFound: false,
 			user: this.props.user
 		};
 	}
@@ -25,8 +27,12 @@ class UserDetailPage extends React.Component {
 		this.setState({ loading: true });
 		return this.props.get(id)
 			.then((user) => this.setState({ user, loading: false }))
-			.catch(() => this.setState({ loading: false }));
+			.catch(() => {
+				toast.error('Usuário inexistente');
+				this.setState({ loading: false, notFound: true });
+			});
 	}
+
 	componentWillReceiveProps(nextProps, nextState) {
 		if (this.props.match.params.id !== nextProps.match.params.id)
 			this.load(nextProps.match.params.id);
@@ -37,6 +43,7 @@ class UserDetailPage extends React.Component {
 	render() {
 		return (
 			<Panel>
+				{this.state.notFound && <Redirect to='/users/' />}
 				<Panel.Body>
 					{this.state.loading && <Loading />}
 					{!this.state.loading &&
@@ -54,6 +61,7 @@ class UserDetailPage extends React.Component {
 						</ListGroup>
 					}
 				</Panel.Body>
+
 			</Panel>
 		);
 	}

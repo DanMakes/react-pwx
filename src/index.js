@@ -5,7 +5,9 @@ import App from './components/App';
 import { Provider } from 'react-redux';
 import registerServiceWorker from './registerServiceWorker';
 import configStore from './store/configStore';
+import 'react-toastify/dist/ReactToastify.css';
 require('./index.css');
+
 
 const store = configStore();
 
