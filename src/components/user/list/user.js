@@ -25,6 +25,8 @@ class UserListPage extends React.Component {
 		this.onSearch();
 	}
 	onSearch(query, page) {
+		if (this.state.loading) return;
+
 		this.setState({ query, page, loading: true });
 		this.props.load({ query, page })
 			.then(() => this.setState({ loading: false }))

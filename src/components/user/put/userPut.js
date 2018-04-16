@@ -87,7 +87,6 @@ class UserPutPage extends React.Component {
 			state.sobrenome.message = state.nome.message = 'Nome e sobrenome excedem o limite de 150 caracteres';
 			isValid = false;
 		}
-		console.log(moment(state.nascimento.value, 'DD/MM/YYYY').isValid())
 		if (!moment(state.nascimento.value, 'DD/MM/YYYY').isValid()) {
 			state.nascimento.valid = false;
 			state.nascimento.message = 'Data inválida';
