@@ -11,6 +11,8 @@
 
 O servidor (json-server) vai iniciar na porta 8888 e o client na porta 3000.
 
+Ah... não sei porque, mas levei em consideração a entidade como Usuário e não Pessoa.
+
 # Desenvolvimento
 Alguns dos itens solicitados não foram desenvolvidos - como o gráfico de distribuição de pessoas por idade, testes unitários e o projeto estar em modo autocontido.
 Todo o progresso do desenvolvimento pode ser visualizado através dos [commits](https://gitlab.com/joaohencke/pwx-react/commits/master).
