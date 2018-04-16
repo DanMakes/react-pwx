@@ -1,13 +1,3 @@
 {
-  "pessoas": [
-    {
-      "id": 1,
-      "isCreation": false,
-      "nome": "Joãoe",
-      "sobrenome": "Henckee",
-      "cpf": "04678444963",
-      "email": "joao.hencke@gmail.com",
-      "nascimentoTs": 1543629600000
-    }
-  ]
+  "pessoas": []
 }

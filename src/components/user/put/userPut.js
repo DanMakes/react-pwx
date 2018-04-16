@@ -153,11 +153,11 @@ class UserPutPage extends React.Component {
 		user.nascimentoTs = moment(user.nascimento, 'dd/MM/yyyy').valueOf();
 		delete user.nascimento;
 
-		return this.props.put(user)
+		return this.props.put(Object.assign({}, user))
 			.then(() => toast.success('Usuário salvo com sucesso'))
 			.catch(() => toast.error('Problemas ao salvar usuário'))
 			.then(() => this.setState({ submitting: false }))
-			.then(() => this.isCreation ? this.props.history.goBack.bind(this.props.history) : function () { });
+			.then(() => this.props.isCreation ? this.props.history.goBack.bind(this.props.history)() : function () { });
 	}
 	load(id) {
 		this.setState({ loading: true });
@@ -199,8 +199,6 @@ class UserPutPage extends React.Component {
 			})
 			.catch(() => {
 				toast.error('Usuário inexistente');
-				this.setState({ loading: false });
-				this.props.history.goBack();
 			});
 	}
 	componentWillMount() {

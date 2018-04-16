@@ -9,6 +9,9 @@ import * as userActions from '../../../actions/userActions';
 import PropTypes from 'prop-types';
 import { Loading } from '../../common';
 import DetailTextField from './detailTextField';
+import UserDelete from '../delete/userDelete';
+import UserEditButton from '../list/userEditButton';
+
 
 class UserDetailPage extends React.Component {
 	constructor(props, context) {
@@ -44,6 +47,12 @@ class UserDetailPage extends React.Component {
 		return (
 			<Panel>
 				{this.state.notFound && <Redirect to='/users/' />}
+				<Panel.Heading>
+					<div className="btn-group">
+						<UserDelete user={this.props.user} goBack={true} /> &nbsp;
+								<UserEditButton id={Number(this.props.match.params.id)} goBack={true} />
+					</div>
+				</Panel.Heading>
 				<Panel.Body>
 					{this.state.loading && <Loading />}
 					{!this.state.loading &&

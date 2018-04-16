@@ -13,7 +13,8 @@ class UserDelete extends React.Component {
 
 		this.state = {
 			user: this.props.user,
-			removing: false
+			removing: false,
+			goBack: this.props.goBack
 		};
 		this.remove.bind(this);
 	}
@@ -28,7 +29,14 @@ class UserDelete extends React.Component {
 
 		this.props.remove(this.props.user.id)
 			.then(() => toast.success('Usuário removido com sucesso'))
-			.catch(toast.error);
+			.catch(toast.error)
+			.then(() => {
+				if (this.props.goBack) {
+					// this.props.history.goBack();
+					this.setState({ removing: false })
+				} else {
+				}
+			});
 	}
 	render() {
 		return (
@@ -38,8 +46,14 @@ class UserDelete extends React.Component {
 };
 
 UserDelete.propTypes = {
-	user: PropTypes.object.isRequired
+	user: PropTypes.object.isRequired,
+	goBack: PropTypes.bool
 };
+
+UserDelete.propDefault = {
+	goBack: false
+};
+
 
 
 const mapStateToProps = (state, ownProps) => ({ user: ownProps.user, removing: false });
