@@ -13,7 +13,7 @@ O servidor (json-server) vai iniciar na porta 8888 e o client na porta 3000.
 
 # Desenvolvimento
 Alguns dos itens solicitados não foram desenvolvidos - como o gráfico de distribuição de pessoas por idade, testes unitários e o projeto estar em modo autocontido.
-Todo o progresso do desenvolvimento pode ser visualizado através dos commits aqui.
+Todo o progresso do desenvolvimento pode ser visualizado através dos [commits](https://gitlab.com/joaohencke/pwx-react/commits/master).
 
 Optei por escolher o desenvolvimento com o React por ser uma lib que nunca tinha tido contato (até quinta-feira), mesmo sabendo que a busca é por desenvolvedor Angular.
 Não dei muita importância para a interface gráfica e sim para o desenvolvimento em si, pois meu tempo estava apertado.
