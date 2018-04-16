@@ -10,7 +10,7 @@ export function get(id) {
 };
 
 export function put(user) {
-	return (dispatch) => userApi.put(user).then(res => dispatch(getSuccess(res.data, USER.CREATE.SUCCESS)));
+	return (dispatch) => userApi.put(user).then(res => dispatch(getSuccess(res.data, user.isCreation ? USER.CREATE.SUCCESS : USER.UPDATE.SUCCESS)));
 };
 
 export function remove(id) {

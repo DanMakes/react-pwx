@@ -10,5 +10,8 @@ export const USER = {
 	},
 	DELETE: {
 		SUCCESS: 'USER_DELETE_SUCCESS'
+	},
+	UPDATE: {
+		SUCCESS: 'USER_UPDATE_SUCCESS'
 	}
 };

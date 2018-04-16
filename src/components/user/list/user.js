@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Panel, Pager } from 'react-bootstrap';
+import { Row, Col, Panel, Pager, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import UserSearch from './userSearch';
@@ -41,7 +41,14 @@ class UserListPage extends React.Component {
 				<Col>
 					<Panel>
 						<Panel.Heading>
-							<UserSearch onChange={(args) => this.onSearch(args)} />
+							<Row>
+								<Col md={10}>
+									<UserSearch onChange={(args) => this.onSearch(args)} />
+								</Col>
+								<Col md={2}>
+									<Button bsStyle='default' bsSize='sm' type='button' onClick={() => this.onSearch(this.state.query, this.state.page)}>Atualizar</Button>
+								</Col>
+							</Row>
 						</Panel.Heading>
 						{this.state.loading && <Loading />}
 						<Panel.Body>

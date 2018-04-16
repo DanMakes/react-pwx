@@ -1,5 +1,4 @@
 import React from 'react';
-import ConfirmDialog from './confirmDialog';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -33,9 +32,7 @@ class UserDelete extends React.Component {
 	}
 	render() {
 		return (
-			<div className='wrapper'>
-				<button type='button' className='btn btn-sm btn-danger' onClick={(e) => this.remove(e)} disabled={this.state.removing}>  {this.state.removing ? (<BounceLoader size={18} />) : 'Remover'}</button>
-			</div>
+			<button type='button' className='btn btn-sm btn-danger' onClick={(e) => this.remove(e)} disabled={this.state.removing}>  {this.state.removing ? (<BounceLoader size={18} />) : 'Remover'}</button>
 		);
 	}
 };

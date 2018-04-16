@@ -45,6 +45,7 @@ class UserPage extends React.Component {
 					<Col md={6}>
 						<Route exact path='/users/:id([0-9])' component={UserDetailPage} />
 						<Route exact path='/users/novo' component={UserPutPage} />
+						<Route exact path='/users/:id([0-9])/editar' component={UserPutPage} />
 					</Col>
 				</Row>
 				<ToastContainer />

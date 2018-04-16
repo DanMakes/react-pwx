@@ -25,6 +25,20 @@ export default function userReducer(state = initialState, action) {
 				user: Object.assign({}, action.user)
 			};
 		}
+		case USER.UPDATE.SUCCESS: {
+			const users = [...state.users];
+			const index = users.findIndex(item => item.id === action.user.id);
+
+			if (index >= 0) {
+				users[index] = action.user;
+			}
+			return {
+				...state,
+				users,
+				user: action.user
+			};
+
+		}
 		case USER.DELETE.SUCCESS: {
 			const users = [...state.users].filter(item => item.id !== action.user.id);
 			return {
