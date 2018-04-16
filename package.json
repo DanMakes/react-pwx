@@ -26,9 +26,13 @@
     "validator": "^9.4.1"
   },
   "scripts": {
-    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start": "concurrently --kill-others --prefix \"[{name}]\" --names \"BACK ,FRONT\" -c \"bgBlue.bold,bgGreen.bold\" \"json-server --watch db.json --port 8888\" \"react-scripts start\""
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.1",
+    "json-server": "^0.12.1"
   }
 }

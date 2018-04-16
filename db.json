@@ -1,3 +1,13 @@
 {
-  "pessoas": []
+  "pessoas": [
+    {
+      "isCreation": true,
+      "nome": "José",
+      "sobrenome": "Ferreira",
+      "cpf": "11111111111",
+      "email": "jose@gmail.com",
+      "nascimentoTs": 1543629600000,
+      "id": 1
+    }
+  ]
 }
